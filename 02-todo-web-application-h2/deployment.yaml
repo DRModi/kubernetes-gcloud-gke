@@ -1,0 +1,53 @@
+# Deployments.yaml downloaded from the GCP 
+apiVersion: extensions/v1beta1
+kind: Deployment
+# kind: ReplicaSet
+metadata:
+  labels:
+    app: todo-web-application-h2
+  name: todo-web-application-h2
+  namespace: default
+spec:
+  replicas: 2
+  #Providing minReadySeconds for application/pod to come alive
+  minReadySeconds: 45
+  selector:
+    matchLabels:
+      app: todo-web-application-h2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: todo-web-application-h2
+    spec:
+      containers:
+      - image: drmodi/todo-web-application-h2-ke:0.0.1-RELEASE
+        imagePullPolicy: IfNotPresent
+        name: todo-web-application-h2
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+---
+
+# Service.yaml downloaded from the GCP 
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: todo-web-application-h2
+  name: todo-web-application-h2
+  namespace: default
+spec:
+  ports:
+  - nodePort: 32676
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: todo-web-application-h2
+  sessionAffinity: ClientIP
+  type: LoadBalancer
+

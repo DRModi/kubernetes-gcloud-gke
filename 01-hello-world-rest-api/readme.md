@@ -16,8 +16,8 @@ Hello World V1 abcde
 {"message":"Hello World"}
 ```
 
-- http://localhost:8080/hello-world/path-variable/in28minutes
+- http://localhost:8080/hello-world/path-variable/drmodi-JayMataji
 
 ```json
-{"message":"Hello World, in28minutes"}
+{"message":"Hello World, drmodi-JayMataji"}
 ```

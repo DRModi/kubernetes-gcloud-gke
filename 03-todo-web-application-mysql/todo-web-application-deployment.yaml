@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: todo-web-application
+  name: todo-web-application
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        io.kompose.service: todo-web-application
+    spec:
+      containers:
+      - env:
+        - name: RDS_DB_NAME
+#          value: todos
+          valueFrom:
+            configMapKeyRef:
+              key: RDS_DB_NAME
+              name: todo-web-application-config  
+        - name: RDS_HOSTNAME
+#          value: mysql
+          valueFrom:
+            configMapKeyRef:
+              key: RDS_HOSTNAME
+              name: todo-web-application-config
+        - name: RDS_PASSWORD
+#          value: dummytodos
+          valueFrom:
+            secretKeyRef:
+              key: RDS_PASSWORD
+              name: todo-web-application-secret
+        - name: RDS_PORT
+#          value: "3306"
+          valueFrom:
+            configMapKeyRef:
+              key: RDS_PORT
+              name: todo-web-application-config
+        - name: RDS_USERNAME
+#          value: todos-user
+          valueFrom:
+            configMapKeyRef:
+              key: RDS_USERNAME
+              name: todo-web-application-config
+        image: drmodi/todo-web-application-mysql:0.0.1-SNAPSHOT
+        name: todo-web-application
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always

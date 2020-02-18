@@ -23,7 +23,7 @@ spec:
           value: "3306"
         - name: RDS_USERNAME
           value: todos-user
-        image: in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
+        image: in28Minutes/todo-web-application-mysql:0.0.1-SNAPSHOT
         name: todo-web-application
         ports:
         - containerPort: 8080

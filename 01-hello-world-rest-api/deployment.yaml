@@ -1,13 +1,16 @@
+# Deployments.yaml downloaded from the GCP 
 apiVersion: extensions/v1beta1
 kind: Deployment
+# kind: ReplicaSet
 metadata:
   labels:
     app: hello-world-rest-api
     version: v1
-  name: hello-world-rest-api-v1
+  name: hello-world-rest-v1
   namespace: default
 spec:
   replicas: 2
+  #Providing minReadySeconds for application/pod to come alive
   minReadySeconds: 45
   selector:
     matchLabels:
@@ -25,22 +28,25 @@ spec:
         version: v1
     spec:
       containers:
-      - image: drmodi/hello-world-rest-api:0.0.1.RELEASE
-        imagePullPolicy: IfNotPresent
+      - image: drmodi/hello-world-rest-api-ke:0.0.2-RELEASE
+        imagePullPolicy: Always
         name: hello-world-rest-api
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
 ---
+
 apiVersion: extensions/v1beta1
 kind: Deployment
+# kind: ReplicaSet
 metadata:
   labels:
     app: hello-world-rest-api
     version: v2
-  name: hello-world-rest-api-v2
+  name: hello-world-rest-v2
   namespace: default
 spec:
   replicas: 2
+  #Providing minReadySeconds for application/pod to come alive
   minReadySeconds: 45
   selector:
     matchLabels:
@@ -58,28 +64,30 @@ spec:
         version: v2
     spec:
       containers:
-      - image: drmodi/hello-world-rest-api:0.0.2.RELEASE
-        imagePullPolicy: IfNotPresent
+      - image: drmodi/hello-world-rest-api-ke:0.0.3-RELEASE
+        imagePullPolicy: Always
         name: hello-world-rest-api
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
 ---
+
+# Service.yaml downloaded from the GCP 
 apiVersion: v1
 kind: Service
 metadata:
-  labels: #PODS
+  labels:
     app: hello-world-rest-api
   name: hello-world-rest-api
   namespace: default
 spec:
   ports:
-  - nodePort: 30702
+  - nodePort: 32676
     port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
     app: hello-world-rest-api
-    #to run specific version of the service update the selector
-    version: v1
+    version: v2
   sessionAffinity: None
   type: LoadBalancer
+

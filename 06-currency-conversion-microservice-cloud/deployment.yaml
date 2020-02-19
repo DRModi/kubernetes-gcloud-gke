@@ -22,7 +22,7 @@ spec:
         app: currency-conversion
     spec:
       containers:
-      - image: in28min/currency-conversion:0.0.5-RELEASE #CHANGE
+      - image: drmodi/currency-conversion:0.0.5-RELEASE #CHANGE
         imagePullPolicy: IfNotPresent
         name: currency-conversion
 #        env: //CHANGE

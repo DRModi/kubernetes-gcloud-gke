@@ -6,7 +6,7 @@ metadata:
   name: currency-exchange
   namespace: default
 spec:
-  replicas: 1 #CHANGE
+  replicas: 2 #CHANGE
   minReadySeconds: 45
   selector:
     matchLabels:
@@ -22,7 +22,7 @@ spec:
         app: currency-exchange
     spec:
       containers:
-      - image: in28min/currency-exchange:0.0.1-RELEASE #CHANGE
+      - image: drmodi/currency-exchange:0.0.1-RELEASE #CHANGE
         imagePullPolicy: IfNotPresent
         name: currency-exchange
         ports:
@@ -68,4 +68,5 @@ spec:
   selector:
     app: currency-exchange
   sessionAffinity: None #CHANGE
-  type: LoadBalancer
+#  type: LoadBalancer
+  type: NodePort

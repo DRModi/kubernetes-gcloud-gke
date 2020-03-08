@@ -22,7 +22,7 @@ spec:
         app: currency-exchange
     spec:
       containers:
-      - image: in28min/currency-exchange:3.0.0-RELEASE #CHANGE
+      - image: drmodi/currency-exchange:3.0.0-RELEASE #CHANGE
         imagePullPolicy: Always
         name: currency-exchange
         env:

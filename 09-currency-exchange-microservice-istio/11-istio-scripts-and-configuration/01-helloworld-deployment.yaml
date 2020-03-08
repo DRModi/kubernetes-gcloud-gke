@@ -16,7 +16,7 @@ spec:
         app: hello-world-rest-api
     spec:
       containers:
-      - image: drmodi/hello-world-rest-api-ke:0.0.3-RELEASE
+      - image: in28min/hello-world-rest-api:0.0.1.RELEASE
         imagePullPolicy: IfNotPresent
         name: hello-world-rest-api
         ports:

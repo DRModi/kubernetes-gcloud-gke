@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: hello-world-rest-api
-          image: drmodi/hello-world-rest-api-ke:0.0.1-RELEASE
+          image: in28min/hello-world-rest-api:0.0.1.RELEASE
           imagePullPolicy: IfNotPresent #Always
           ports:
             - containerPort: 8080
@@ -56,7 +56,7 @@ spec:
     spec:
       containers:
         - name: hello-world-rest-api
-          image: drmodi/hello-world-rest-api-ke:0.0.2-RELEASE
+          image: in28min/hello-world-rest-api:0.0.2.RELEASE
           imagePullPolicy: IfNotPresent #Always
           ports:
             - containerPort: 8080

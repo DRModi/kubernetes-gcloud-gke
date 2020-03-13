@@ -39,22 +39,22 @@ You will be using containerizing (using Docker) and deploying a variety of proje
 
 ```
 
-docker run -p 8080:8080 in28min/hello-world-rest-api:0.0.1.RELEASE
+docker run -p 8080:8080 drmodi/hello-world-rest-api:0.0.1.RELEASE
 
-kubectl create deployment hello-world-rest-api --image=in28min/hello-world-rest-api:0.0.1.RELEASE
+kubectl create deployment hello-world-rest-api --image=drmodi/hello-world-rest-api:0.0.1.RELEASE
 kubectl expose deployment hello-world-rest-api --type=LoadBalancer --port=8080
 kubectl scale deployment hello-world-rest-api --replicas=3
 kubectl delete pod hello-world-rest-api-58ff5dd898-62l9d
 kubectl autoscale deployment hello-world-rest-api --max=10 --cpu-percent=70
 kubectl edit deployment hello-world-rest-api #minReadySeconds: 15
-kubectl set image deployment hello-world-rest-api hello-world-rest-api=in28min/hello-world-rest-api:0.0.2.RELEASE
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=drmodi/hello-world-rest-api:0.0.2.RELEASE
 
-gcloud container clusters get-credentials in28minutes-cluster --zone us-central1-a --project solid-course-258105
-kubectl create deployment hello-world-rest-api --image=in28min/hello-world-rest-api:0.0.1.RELEASE
+gcloud container clusters get-credentials drmodiutes-cluster --zone us-central1-a --project solid-course-258105
+kubectl create deployment hello-world-rest-api --image=drmodi/hello-world-rest-api:0.0.1.RELEASE
 kubectl expose deployment hello-world-rest-api --type=LoadBalancer --port=8080
 kubectl set image deployment hello-world-rest-api hello-world-rest-api=DUMMY_IMAGE:TEST
 kubectl get events --sort-by=.metadata.creationTimestamp
-kubectl set image deployment hello-world-rest-api hello-world-rest-api=in28min/hello-world-rest-api:0.0.2.RELEASE
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=drmodi/hello-world-rest-api:0.0.2.RELEASE
 kubectl get events --sort-by=.metadata.creationTimestamp
 kubectl get componentstatuses
 kubectl get pods --all-namespaces
@@ -89,7 +89,7 @@ kubectl get pods
 kubectl describe pod hello-world-rest-api-85995ddd5c-msjsm
 kubectl get events --sort-by=.metadata.creationTimestamp
 
-kubectl set image deployment hello-world-rest-api hello-world-rest-api=in28min/hello-world-rest-api:0.0.2.RELEASE
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=drmodi/hello-world-rest-api:0.0.2.RELEASE
 kubectl get events --sort-by=.metadata.creationTimestamp
 kubectl get pods -o wide
 kubectl delete pod hello-world-rest-api-67c79fd44f-n6c7l
@@ -101,12 +101,12 @@ kubectl get pods --all-namespaces
 
 gcloud auth login
 kubectl version
-gcloud container clusters get-credentials in28minutes-cluster --zone us-central1-a --project solid-course-258105
+gcloud container clusters get-credentials drmodiutes-cluster --zone us-central1-a --project solid-course-258105
 
-kubectl set image deployment hello-world-rest-api hello-world-rest-api=in28min/hello-world-rest-api:0.0.4-SNAPSHOT
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=drmodi/hello-world-rest-api:0.0.4-SNAPSHOT
 
 kubectl rollout history deployment hello-world-rest-api
-kubectl set image deployment hello-world-rest-api hello-world-rest-api=in28min/hello-world-rest-api:0.0.4-SNAPSHOT --record
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=drmodi/hello-world-rest-api:0.0.4-SNAPSHOT --record
 
 kubectl rollout history deployment hello-world-rest-api
 kubectl rollout status deployment hello-world-rest-api
@@ -137,7 +137,7 @@ kubectl delete all -l app=hello-world-rest-api
 kubectl get all -o wide
 
 mvn clean install
-docker push in28min/todo-web-application-h2:0.0.1-SNAPSHOT
+docker push drmodi/todo-web-application-h2:0.0.1-SNAPSHOT
 kubectl delete all -l app=hello-world-rest-api
 
 kubectl get pods
@@ -162,8 +162,8 @@ kubectl get no
 kubectl get po
 
 docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --publish 3306:3306 mysql:5.7
-docker run -p 8080:8080 in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
-docker run -p 8080:8080 --link=mysql --env RDS_HOSTNAME=mysql in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
+docker run -p 8080:8080 drmodi/todo-web-application-mysql:0.0.1-SNAPSHOT
+docker run -p 8080:8080 --link=mysql --env RDS_HOSTNAME=mysql drmodi/todo-web-application-mysql:0.0.1-SNAPSHOT
 
 docker-compose --version
 docker-compose up
@@ -176,7 +176,7 @@ kubectl delete all -l app=todo-web-application-h2
 kubectl apply -f mysql-database-data-volume-persistentvolumeclaim.yaml,mysql-deployment.yaml,mysql-service.yaml
 kubectl get svc
 kubectl apply -f todo-web-application-deployment.yaml,todo-web-application-service.yaml
-docker push in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
+docker push drmodi/todo-web-application-mysql:0.0.1-SNAPSHOT
 kubectl logs todo-web-application-b65cc44d9-7h9pr -f
 
 kubectl apply -f mysql-service.yaml
@@ -216,9 +216,9 @@ metadata:
   name: todo-web-application-config
   namespace: default
 
-cd /in28Minutes/git/kubernetes-crash-course/04-currency-exchange-microservice-basic 
+cd /drmodiutes/git/kubernetes-crash-course/04-currency-exchange-microservice-basic 
 mvn clean install
-docker push in28min/currency-exchange:0.0.1-RELEASE
+docker push drmodi/currency-exchange:0.0.1-RELEASE
 kubectl apply -f deployment.yaml
 curl 34.67.103.178:8000/currency-exchange/from/USD/to/INR
 
@@ -231,7 +231,7 @@ kubectl get hpa -o yaml
 kubectl get hpa -o yaml > 01-hpa.yaml
 kubectl get hpa currency-exchange -o yaml > 01-hpa.yaml
 
-kubectl set image deployment hello-world-rest-api --image=in28min/hello-world-rest-api:0.0.4-SNAPSHOT
+kubectl set image deployment hello-world-rest-api --image=drmodi/hello-world-rest-api:0.0.4-SNAPSHOT
 kubectl apply -f ingress.yaml
 kubectl get ingress
 kubectl describe gateway-ingress
@@ -239,7 +239,7 @@ kubectl describe gateway gateway-ingress
 kubectl describe ingress gateway-ingress
 kubectl apply -f rbac.yml
  
-docker push in28min/currency-conversion:0.0.5-RELEASE
+docker push drmodi/currency-conversion:0.0.5-RELEASE
 
 kubectl create configmap currency-conversion --from-literal=YOUR_PROPERTY=value --from-literal=YOUR_PROPERTY_2=value2
 
@@ -261,7 +261,7 @@ kubectl apply -f 05-helloworld-mirroring.yaml
 kubectl apply -f 06-helloworld-canary.yaml 
 watch -n 0.1 curl 35.223.25.220/hello-world
 
-gcloud container clusters get-credentials in28minutes-cluster-istio --zone us-central1-a --project solid-course-258105
+gcloud container clusters get-credentials drmodiutes-cluster-istio --zone us-central1-a --project solid-course-258105
 kubectl create namespace istio-system
 curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.2.2 sh -
 ls istio-1.2.2
@@ -274,7 +274,7 @@ kubectl get pods --namespace istio-system
 kubectl get services --namespace istio-system
 
 
-docker push in28min/currency-exchange:3.0.0-RELEASE
+docker push drmodi/currency-exchange:3.0.0-RELEASE
 kubectl apply -f deployment.yaml 
 kubectl apply -f 11-istio-scripts-and-configuration/07-hw-virtualservice-all-services.yaml 
 kubectl get secret -n istio-system kiali
